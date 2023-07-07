@@ -11,7 +11,6 @@ namespace ConsoleCalculator
                 throw new ArgumentNullException("Invalid syntax.");
             }
 
-
             return EvaluateExpression(input);
 
         }
@@ -31,29 +30,7 @@ namespace ConsoleCalculator
                 throw new ArgumentException("Invalid operands. Operands must be valid integers.");
             }
 
-
-            IBasicOperation? operation;
-
-            if (input.Contains("+"))
-            {
-                operation = new AdditionOperation();
-            }
-            else if (input.Contains("-"))
-            {
-                operation = new SubtractionOperation();
-            }
-            else if (input.Contains("*"))
-            {
-                operation = new MultiplicationOperation();
-            }
-            else if (input.Contains("/"))
-            {
-                 operation = new DivisionOperation();
-            }
-            else
-            {
-                throw new ArgumentException("Incorrect operation. Valid operations: +, -, *, /");
-            }
+            IBasicOperation operation = CalculateOperation.Calculate(input);
 
             return operation.Calculate(operand1, operand2);
         }
